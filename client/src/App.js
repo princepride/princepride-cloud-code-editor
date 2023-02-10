@@ -31,7 +31,10 @@ function App() {
   return (
     <>
       <FileUploader onFileLoad={setFile} />
-      <Editor height="90vh" language={language} value={value} />
+      <Editor height="90vh" language={language} theme="vs-dark" value={value} 
+      options={{
+        selectOnLineNumbers: true
+      }}/>
     </>
   );
 }
