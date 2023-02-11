@@ -1,4 +1,4 @@
-export default {
+const initialTree =  {
     module: "react-ui-tree",
     id: "root-0",
     children: [
@@ -113,3 +113,5 @@ export default {
       }
     ]
   };
+
+export default initialTree;
