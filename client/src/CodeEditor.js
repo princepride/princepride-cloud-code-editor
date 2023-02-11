@@ -1,5 +1,6 @@
 import { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
+import './CodeEditor.css'
 
 function CodeEditor(props) {
 
@@ -8,8 +9,8 @@ function CodeEditor(props) {
     const [language, setLanguage] = useState('javascript');
 
     return (
-        <div>
-            <Editor height="90vh" language={language} theme="vs-dark" value={value} 
+        <div className="code-editor">
+            <Editor language={language} theme="vs-dark" value={value} 
                 onChange={(newValue) => {setValue(newValue)}}
                 options={{
                 selectOnLineNumbers: true

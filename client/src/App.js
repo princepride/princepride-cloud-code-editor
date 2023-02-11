@@ -5,7 +5,7 @@ function App() {
   return (
     <div>
       <FileExplorer />
-      {/*<CodeEditor />*/}
+      <CodeEditor />
     </div>
   );
 }

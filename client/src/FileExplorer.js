@@ -1,4 +1,4 @@
-import { Fragment, useState } from "react";
+import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import Tree from "react-ui-tree";
 import initialTree from "./tree";
@@ -47,20 +47,17 @@ function deleteFromTree(o, id) {
   [o].some(getNode);
 }
 
-//const initialState = {
-//  active: null,
-//  tree: {
-//    ...initialTree
-//  },
-//  collapsed: false // start with unmodified tree
-//};
+const initialState = {
+  tree: {
+    ...initialTree
+  },
+  collapsed: false // start with unmodified tree
+};
 
-function FileExplorer(props) {
-  const [tree, setTree] = useState(initialTree)
-  const [collapsed, setCollapsed] = useState(false);
-  //state = initialState;
+class FileExplorer extends Component {
+  state = initialState;
 
-  const renderNode = (node) => {
+  renderNode = (node) => {
     const renderFileFolderToolbar = (isFolder, caption) => (
       <Toolbar>
         <FloatLeft>
@@ -99,14 +96,14 @@ function FileExplorer(props) {
         name={node.id}
         collect={collect}
         holdToDisplay={-1}
-        onItemClick={handleContextClick}
+        onItemClick={this.handleContextClick}
       >
         {renderFileFolderToolbar(isFolder, node.module)}
       </ContextMenuTrigger>
     );
   };
 
-  const addItem = (itemType, active) => {
+  addItem = (itemType, active) => {
     const { tree } = this.state;
     const newItem =
       itemType === "folder"
@@ -128,12 +125,11 @@ function FileExplorer(props) {
       }
       return cloneItem;
     });
-    
-    setTree(newTree);
-    //this.setState({ ...newTree });
+
+    this.setState({ ...newTree });
   };
 
-  const handleContextClick = (e, { action, name: id }) => {
+  handleContextClick = (e, { action, name: id }) => {
     const { tree } = this.state;
 
     switch (action) {
@@ -172,25 +168,22 @@ function FileExplorer(props) {
     }
   };
 
-  const toggleCollapse = () => {
+  toggleCollapse = () => {
     this.setState(({ collapsed }) => ({ collapsed: !collapsed }));
   };
 
-  const handleChange = (tree) => {
-    this.setState({
-      tree: tree
-    });
-  };
+  render() {
+    const { collapsed } = this.state;
 
     return (
       <div>
-        <div className="tree">
+        <div className="file-explorer-tree">
           <Toolbar>
             <FloatLeft>
               <Icon
                 title={collapsed ? "expand" : "collapse"}
                 icon={collapsed ? chevronsRight : chevronsDown}
-                onClick={toggleCollapse}
+                onClick={this.toggleCollapse}
               />
               <span>Storage location</span>
             </FloatLeft>
@@ -199,44 +192,45 @@ function FileExplorer(props) {
             <StrollableContainer draggable bar={LightScrollbar}>
               <Tree
                 paddingLeft={20}
-                tree={tree}
-                onChange={handleChange}
-                renderNode={renderNode}
+                tree={this.state.tree}
+                onChange={this.handleChange}
+                renderNode={this.renderNode}
               />
             </StrollableContainer>
           )}
         </div>
-        <div
+        {/*<div
           className="inspector"
           style={{ overflow: "hidden", height: "100vh" }}
         >
           <StrollableContainer draggable>
-            <pre>{JSON.stringify(tree, null, "  ")}</pre>
+            <pre>{JSON.stringify(this.state.tree, null, "  ")}</pre>
           </StrollableContainer>
-        </div>
+        </div>*/}
 
         <ContextMenu id="FILE_CONTEXT_MENU">
-          {/* Add copy / cut later */}
-          {/* <MenuItem data={{ action: "copy" }} onClick={this.handleContextClick}>
-            Copy
-          </MenuItem>
-          <MenuItem divider /> */}
           <MenuItem
             data={{ action: "rename" }}
-            onClick={handleContextClick}
+            onClick={this.handleContextClick}
           >
             Rename
           </MenuItem>
           <MenuItem
             data={{ action: "delete" }}
-            onClick={handleContextClick}
+            onClick={this.handleContextClick}
           >
             Delete
           </MenuItem>
         </ContextMenu>
       </div>
     );
+  }
 
+  handleChange = (tree) => {
+    this.setState({
+      tree: tree
+    });
+  };
 }
 
 const LightScrollbar = styled.div`

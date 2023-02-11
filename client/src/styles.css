@@ -15,8 +15,3 @@ body {
 .inspector {
   margin-left: 220px;
 }
-
-.inspector pre {
-  font-family: "Lucida Console", Monaco, monospace;
-  font-size: 13px;
-}
