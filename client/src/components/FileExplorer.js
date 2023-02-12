@@ -109,7 +109,8 @@ class FileExplorer extends Component {
 
   addItem = (itemType, active) => {
     const { tree } = this.state;
-    const newItem =
+    const suffix = document.querySelector('h5').context;
+    const newItem = 
       itemType === "folder"
         ? {
             id: `root-${Date.now()}`,
@@ -117,7 +118,7 @@ class FileExplorer extends Component {
             children: [],
             collapsed: false,
           }
-        : { id: `${Date.now()}`, leaf: true, module: `New ${itemType}`,context: ""};
+        : { id: `${Date.now()}`, leaf: true, module: `New ${itemType}.${suffix}`,context: ""};
 
     const newTree = _.mapDeep(tree, (item, key, parentValue) => {
       const cloneItem = Object.assign({}, item);

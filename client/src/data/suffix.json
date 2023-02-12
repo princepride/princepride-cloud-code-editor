@@ -1,0 +1,13 @@
+{
+    "cpp": "cpp",
+    "cs": "csharp",
+    "go": "go",
+    "java": "java",
+    "js": "javascript",
+    "kt": "kotlin",
+    "php": "php",
+    "py": "python",
+    "rb": "ruby",
+    "swift": "swift",
+    "ts": "typescript"
+}
