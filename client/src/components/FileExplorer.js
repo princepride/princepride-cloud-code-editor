@@ -180,6 +180,18 @@ class FileExplorer extends Component {
         });
         this.props.setTree(this.state.tree);
         break;
+      case "download":
+        const downloadObj = _.findDeep(tree, (item) => item.id === id, {
+          childrenPath: "children"
+        });
+        var text = downloadObj.value.context;
+        var blob = new Blob([text], {type: "text/plain"});
+        var link = URL.createObjectURL(blob);
+        var a = document.createElement("a");
+        a.href = link;
+        a.download = downloadObj.value.module;
+        a.click();
+        break;
       default:
     }
   };
@@ -237,6 +249,12 @@ class FileExplorer extends Component {
             onClick={this.handleContextClick}
           >
             Delete
+          </MenuItem>
+          <MenuItem
+            data={{ action: "download" }}
+            onClick={this.handleContextClick}
+          >
+            Download
           </MenuItem>
         </ContextMenu>
       </div>
