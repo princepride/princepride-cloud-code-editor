@@ -9,7 +9,6 @@ function App() {
   const [tree, setTree] = useState(initialTree);
   return (
     <div>
-      <h5>js</h5>
       <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
       <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
     </div>

@@ -14,7 +14,6 @@ function CodeEditor(props) {
         let filename = node.module;
         let fileSuffix = filename.split('.').pop();
         console.log(fileSuffix);
-        document.querySelector('h5').context = fileSuffix;
         setLanguage(languageSuffix[fileSuffix])
         console.log(language)
     }, [fileId])
