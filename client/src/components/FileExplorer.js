@@ -1,7 +1,7 @@
 import React, { Component, Fragment } from "react";
 import ReactDOM from "react-dom";
 import Tree from "react-ui-tree";
-import initialTree from "../data/tree";
+
 import Icon from "react-icons-kit";
 import { folder } from "react-icons-kit/feather/folder";
 import { file } from "react-icons-kit/feather/file";
@@ -44,15 +44,13 @@ function deleteFromTree(o, id) {
   [o].some(getNode);
 }
 
-const initialState = {
-  tree: {
-    ...initialTree
-  },
-  collapsed: false // start with unmodified tree
-};
-
 class FileExplorer extends Component {
-  state = initialState;
+  state = {
+    tree: {
+      ...this.props.initialTree
+    },
+    collapsed: false // start with unmodified tree
+  };
 
   renderNode = (node) => {
     const renderFileFolderToolbar = (isFolder, caption) => (
@@ -87,7 +85,7 @@ class FileExplorer extends Component {
 
     const isFolder = node.hasOwnProperty("children");
     return (
-      <div onClick={()=>this.handleLeftClick(node.id)}>
+      <div onClick={()=>{this.handleLeftClick(node)}}>
       <ContextMenuTrigger
         id="FILE_CONTEXT_MENU"
         key={node.id}
@@ -101,6 +99,13 @@ class FileExplorer extends Component {
       </div>
     );
   };
+
+  handleLeftClick = (node) => {
+    if (node.leaf === true) {
+      //console.log(node.id)
+      this.props.setFileId(node.id)
+    }
+  }
 
   addItem = (itemType, active) => {
     const { tree } = this.state;
@@ -167,11 +172,6 @@ class FileExplorer extends Component {
       default:
     }
   };
-
-  handleLeftClick = ( id ) => {
-    const { tree } = this.state;
-    console.log(id);
-  }
 
   toggleCollapse = () => {
     this.setState(({ collapsed }) => ({ collapsed: !collapsed }));
