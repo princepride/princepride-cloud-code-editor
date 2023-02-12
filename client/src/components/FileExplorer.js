@@ -47,7 +47,7 @@ function deleteFromTree(o, id) {
 class FileExplorer extends Component {
   state = {
     tree: {
-      ...this.props.initialTree
+      ...this.props.tree
     },
     collapsed: false // start with unmodified tree
   };
@@ -129,8 +129,8 @@ class FileExplorer extends Component {
       }
       return cloneItem;
     });
-
     this.setState({ ...newTree });
+    this.props.setTree(this.state.tree);
   };
 
   handleContextClick = (e, { action, name: id }) => {
@@ -162,12 +162,14 @@ class FileExplorer extends Component {
             { childrenPath: "children" }
           )
         );
+        this.props.setTree(this.state.tree);
         break;
       case "delete":
         deleteFromTree(tree, id);
         this.setState({
           tree
         });
+        this.props.setTree(this.state.tree);
         break;
       default:
     }
@@ -175,6 +177,7 @@ class FileExplorer extends Component {
 
   toggleCollapse = () => {
     this.setState(({ collapsed }) => ({ collapsed: !collapsed }));
+    this.props.setTree(this.state.tree);
   };
 
   render() {
@@ -235,6 +238,7 @@ class FileExplorer extends Component {
     this.setState({
       tree: tree
     });
+    this.props.setTree(this.state.tree);
   };
 }
 

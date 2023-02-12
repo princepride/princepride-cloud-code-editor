@@ -4,12 +4,12 @@ import FileExplorer from './components/FileExplorer';
 import initialTree from "./data/tree";
 function App() {
 
-  const [fileId, setFileId] = useState(0);
+  const [fileId, setFileId] = useState("0");
   const [tree, setTree] = useState(initialTree);
   return (
     <div>
-      <FileExplorer setFileId={setFileId} initialTree={tree}/>
-      <CodeEditor fileId={fileId}/>
+      <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
+      <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
     </div>
   );
 }

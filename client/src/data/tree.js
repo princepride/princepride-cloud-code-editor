@@ -11,7 +11,7 @@ const initialTree =  {
             id: "0",
             module: "node.js",
             leaf: true,
-            text: "console.log(\"id 0\")"
+            context: "console.log(\"id 0\")"
           },
         ]
       },
@@ -19,7 +19,7 @@ const initialTree =  {
         id: "1",
         module: "node2.js",
         leaf: true,
-        text: "console.log(\"id 1\")"
+        context: "console.log(\"id 1\")"
       },
       {
         "id": "2",
