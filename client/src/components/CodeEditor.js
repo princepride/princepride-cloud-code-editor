@@ -8,9 +8,7 @@ function CodeEditor(props) {
     const [language, setLanguage] = useState('javascript');
 
     useEffect(() =>{
-        console.log(fileId);
         let node = findNode(tree,fileId);
-        console.log(node);
         setValue(node.context);
     }, [fileId])
 

@@ -115,9 +115,9 @@ class FileExplorer extends Component {
             id: `root-${Date.now()}`,
             module: `New ${itemType}`,
             children: [],
-            collapsed: false
+            collapsed: false,
           }
-        : { id: `${Date.now()}`, leaf: true, module: `New ${itemType}` };
+        : { id: `${Date.now()}`, leaf: true, module: `New ${itemType}`,context: ""};
 
     const newTree = _.mapDeep(tree, (item, key, parentValue) => {
       const cloneItem = Object.assign({}, item);
