@@ -10,7 +10,8 @@ const initialTree =  {
           {
             id: "0",
             module: "node.js",
-            leaf: true
+            leaf: true,
+            text: "Hello"
           },
           {
             id: "1",
