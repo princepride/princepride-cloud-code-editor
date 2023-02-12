@@ -1,5 +1,5 @@
-import CodeEditor from './CodeEditor';
-import FileExplorer from './FileExplorer';
+import CodeEditor from './components/CodeEditor';
+import FileExplorer from './components/FileExplorer';
 function App() {
 
   return (

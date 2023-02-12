@@ -1,5 +1,7 @@
 .code-editor {
     overflow:hidden;
     height: 100vh;
+    margin: 0;
+    padding: 0;
     margin-left: 220px;
 }
