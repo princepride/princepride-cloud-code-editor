@@ -87,7 +87,7 @@ class FileExplorer extends Component {
 
     const isFolder = node.hasOwnProperty("children");
     return (
-      <div onClick={()=>{console.log('click')}}>
+      <div onClick={()=>this.handleLeftClick(node.id)}>
       <ContextMenuTrigger
         id="FILE_CONTEXT_MENU"
         key={node.id}
@@ -167,6 +167,11 @@ class FileExplorer extends Component {
       default:
     }
   };
+
+  handleLeftClick = ( id ) => {
+    const { tree } = this.state;
+    console.log(id);
+  }
 
   toggleCollapse = () => {
     this.setState(({ collapsed }) => ({ collapsed: !collapsed }));
