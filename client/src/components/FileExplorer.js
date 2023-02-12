@@ -109,15 +109,24 @@ class FileExplorer extends Component {
 
   addItem = (itemType, active) => {
     const { tree } = this.state;
+    let response = "";
+    if(itemType === "folder") {
+      response = prompt("Please input folder name");
+      response = response === "" ? "New folder" : response;
+    }
+    else {
+      response = prompt("Please input file name")
+      response = response === "" ? "New file" : response;
+    }
     const newItem = 
       itemType === "folder"
         ? {
             id: `root-${Date.now()}`,
-            module: `New ${itemType}`,
+            module: `${response}`,
             children: [],
             collapsed: false,
           }
-        : { id: `${Date.now()}`, leaf: true, module: `New ${itemType}`,context: ""};
+        : { id: `${Date.now()}`, leaf: true, module: `${response}`,context: ""};
 
     const newTree = _.mapDeep(tree, (item, key, parentValue) => {
       const cloneItem = Object.assign({}, item);
