@@ -1,4 +1,4 @@
-/**,
+*,
 *:before,
 *:after {
   -webkit-box-sizing: border-box;
@@ -9,10 +9,4 @@
 body {
   margin: 0;
   padding: 0;
-}*/
-
-@import "tailwindcss/base";
-
-@import "tailwindcss/components";
-
-@import "tailwindcss/utilities";
+}
