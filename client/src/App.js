@@ -35,8 +35,15 @@ function App() {
   }
   return (
     <div style={background}>
-      <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
-      <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
+        <SplitPane
+          split="vertical"
+          minSize={100}
+          maxSize={-100}
+          defaultSize={"20%"}
+        >
+          <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
+          <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
+        </SplitPane>
       <button type="button" style={buttonStyle}><FiSettings style={iconStyle}/></button>
     </div>
   );

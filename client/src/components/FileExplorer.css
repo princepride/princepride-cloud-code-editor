@@ -1,4 +1,4 @@
-.react-contextmenu {
+/*.react-contextmenu {
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0,0,0,.15);
@@ -6,7 +6,6 @@
     color: #373a3c;
     font-size: 16px;
     margin: 2px 0 0;
-    min-width: 160px;
     outline: none;
     opacity: 0;
     padding: 5px 0;
@@ -18,7 +17,6 @@
   .react-contextmenu.react-contextmenu--visible {
     opacity: 1;
     pointer-events: auto;
-    z-index: 9999;
   }
   
   .react-contextmenu-item {
@@ -67,7 +65,6 @@
     content: "▶";
     display: inline-block;
     position: absolute;
-    right: 7px;
   }
   
   .example-multiple-targets::after {
@@ -80,7 +77,6 @@
     top: 0;
     left: 0;
     bottom: 0;
-    width: 200px;
     height: 100vh;
     background-color: #21252b;
     font-size: 1.4em;
@@ -98,10 +94,19 @@
   
   .m-node .node {
     display: inline-block;
-    width: 100%;
     padding: 4px 5px;
   }
   
   .m-node .node.is-active {
     background-color: #31363f;
+  }*/
+
+  .file-explorer-tree {
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    height: 100vh;
+    background-color: #21252b;
+    font-size: 1.4em;
   }
