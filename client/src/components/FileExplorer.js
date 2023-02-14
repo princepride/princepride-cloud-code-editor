@@ -214,7 +214,7 @@ class FileExplorer extends Component {
                 icon={collapsed ? chevronsRight : chevronsDown}
                 onClick={this.toggleCollapse}
               />
-              <span>Storage location</span>
+              <span>EXPLORER</span>
             </FloatLeft>
           </Toolbar>
           {!collapsed && (

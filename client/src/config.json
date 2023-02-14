@@ -1,3 +1,22 @@
 {
-    "url": "192.168.56.1"
+    "url": "192.168.56.1",
+    "languageSuffix": {
+        "cpp": "cpp",
+        "cs": "csharp",
+        "go": "go",
+        "java": "java",
+        "js": "javascript",
+        "kt": "kotlin",
+        "php": "php",
+        "py": "python",
+        "rb": "ruby",
+        "swift": "swift",
+        "ts": "typescript"
+    },
+    "theme": {
+        "vs-dark": {
+            "color": "green",
+            "font-size": "16px"
+        }
+    }
 }

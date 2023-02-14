@@ -5,11 +5,18 @@ import initialTree from "./data/tree";
 import { FiSettings } from 'react-icons/fi';
 import SplitPane from "react-split-pane";
 import './App.css';
+
+const initialSetting = {
+  color: "green",
+  theme: "vs-dark",
+  backgroundColor: '#1a202c',
+  "font-size": "16px"
+} 
 function App() {
 
   const [fileId, setFileId] = useState("0");
   const [tree, setTree] = useState(initialTree);
-
+  const [setting, setSetting] = useState(initialSetting);
 
   const buttonStyle = {
     position: 'fixed',
@@ -33,6 +40,7 @@ function App() {
   const background = {
     backgroundColor: '#1a202c',
   }
+
   return (
     <div style={background}>
         <SplitPane

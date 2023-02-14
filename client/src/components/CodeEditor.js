@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
-import languageSuffix from '../data/suffix.json';
+import config from '../config.json';
 import './CodeEditor.css'
 
 function CodeEditor(props) {
@@ -13,7 +13,7 @@ function CodeEditor(props) {
         setValue(node.context);
         let filename = node.module;
         let fileSuffix = filename.split('.').pop();
-        setLanguage(languageSuffix[fileSuffix])
+        setLanguage(config.languageSuffix[fileSuffix])
     }, [fileId])
 
     const findNode = (root, targetId) => {

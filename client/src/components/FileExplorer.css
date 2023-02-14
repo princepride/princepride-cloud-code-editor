@@ -102,9 +102,11 @@
   }*/
 
   .file-explorer-tree {
-    position: fixed;
+    padding: 10px;
+    border-style: solid;
+    border: 3px;
     height: 100vh;
-    width: 100%;
+    width: auto;
     background-color: #21252b;
     font-size: 1.4em;
   }
