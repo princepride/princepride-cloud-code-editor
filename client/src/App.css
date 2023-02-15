@@ -47,3 +47,7 @@
   .Resizer.disabled:hover {
     border-color: transparent;
   }
+
+  body {
+    background-color: black;
+  }

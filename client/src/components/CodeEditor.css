@@ -1,6 +1,11 @@
 .code-editor {
     overflow:hidden;
-    height: 100vh;
-    margin: 0;
-    padding: 0;
+    height: 95vh;
+    width: auto;
+    padding: 15px;
+    color: red ;
+    margin: 20px;
+    border-style: solid;
+    border-radius: 25px;
+    background-color: #21252b;
 }

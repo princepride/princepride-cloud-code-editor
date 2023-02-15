@@ -39,6 +39,7 @@ function App() {
 
   const background = {
     backgroundColor: '#1a202c',
+    width:'100vw',
   }
 
   return (
@@ -48,6 +49,7 @@ function App() {
           minSize={100}
           maxSize={-100}
           defaultSize={"20%"}
+          style={{"width":"100vw"}}
         >
           <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
           <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
