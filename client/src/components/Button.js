@@ -1,4 +1,4 @@
-import React from 'react';
+import { useState } from 'react';
 import { FiSettings } from 'react-icons/fi';
 import './Button.css'
 
@@ -11,12 +11,11 @@ const iconStyle = {
 
 function Button(props) {
     const { setsetting } = props;
+    const [show, setShow] = useState(false);
     return (
-        <div>
-            <button className="buttonStyle" type="button" >
-                <FiSettings style={iconStyle} />
-            </button>
-        </div>
+        <button className="buttonStyle" type="button" onClick={() => {setShow(true)}}>
+            <FiSettings style={iconStyle} />
+        </button>
     );
 }
 
