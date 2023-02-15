@@ -7,7 +7,7 @@ import SplitPane from "react-split-pane";
 import './App.css';
 
 const initialSetting = {
-  color: "red",
+  color: '#ff0000',
   theme: "vs-dark",
   backgroundColor: '#1a202c',
   fontSize: "16px"
@@ -20,27 +20,25 @@ function App() {
 
   useEffect(() =>{
     let element1 = document.querySelector('.file-explorer-tree');
-    let element2 = document.querySelector('.code-editor');
-    let element3 = document.querySelector('.buttonStyle');
+    let element2 = document.querySelector('.codeEditor');
     element1.style.color=setting.color;
     element1.style.backgroundColor = setting.backgroundColor;
     element2.style.color=setting.color;
     element2.style.backgroundColor = setting.backgroundColor;
-    element3.style.backgroundColor = setting.color;
   },[setting])
 
   return (
     <div>
-        <SplitPane
-          split="vertical"
-          minSize={100}
-          maxSize={-100}
-          defaultSize={"20%"}
-          style={{"width":"100vw"}}
-        >
-          <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
-          <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
-        </SplitPane>
+      <SplitPane
+        split="vertical"
+        minSize={100}
+        maxSize={-100}
+        defaultSize={"20%"}
+        style={{"width":"100vw"}}
+      >
+        <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
+        <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
+      </SplitPane>
       <Button setsetting={setsetting} setting={setting}/>
     </div>
   );

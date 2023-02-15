@@ -71,16 +71,6 @@
     content: attr(data-count);
     display: block;
   }
-
-  .file-explorer-tree {
-    position: fixed;
-    top: 0;
-    left: 0;
-    bottom: 0;
-    height: 100vh;
-    background-color: #21252b;
-    font-size: 1.4em;
-  }
   
   .m-node.placeholder {
     border: 1px dashed #1385e5;
@@ -109,4 +99,53 @@
     height: 95vh;
     width: auto;
     font-size: 1.4em;
+  }
+
+  .react-contextmenu-item {
+    background: 0 0;
+    border: 0;
+    color: #ffffff;
+    background-color: rgb(80, 80, 80);
+  cursor: pointer;
+    font-weight: 400;
+    line-height: 1.5;
+    padding: 3px 20px;
+    text-align: inherit;
+    white-space: nowrap;
+  }
+
+  .react-contextmenu-item.react-contextmenu-item--active,
+  .react-contextmenu-item.react-contextmenu-item--selected {
+    color: #fff;
+    background-color: #20a0ff;
+    border-color: #20a0ff;
+    text-decoration: none;
+  }
+  
+  .react-contextmenu-item.react-contextmenu-item--disabled,
+  .react-contextmenu-item.react-contextmenu-item--disabled:hover {
+    background-color: transparent;
+    border-color: rgba(0,0,0,.15);
+    color: #878a8c;
+  }
+  
+  .react-contextmenu-item--divider {
+    border-bottom: 1px solid rgba(0,0,0,.15);
+    cursor: inherit;
+    margin-bottom: 3px;
+    padding: 2px 0;
+  }
+  .react-contextmenu-item--divider:hover {
+    background-color: transparent;
+    border-color: rgba(0,0,0,.15);
+  }
+  
+  .react-contextmenu-item.react-contextmenu-submenu {
+  padding: 0;
+  }
+  
+  .react-contextmenu-item.react-contextmenu-submenu > .react-contextmenu-item:after {
+    content: "▶";
+    display: inline-block;
+    position: absolute;
   }

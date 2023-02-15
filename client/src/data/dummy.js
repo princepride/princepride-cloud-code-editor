@@ -20,11 +20,7 @@ export const themeColors = [
       color: '#1E4DB7',
     },
     {
-      color: '#FB9678',
-      name: 'orange-theme',
+      name: 'red',
+      color: '#ff0000',
     },
-    {
-        color: '#ff0000',
-        name: 'red',
-      },
   ];

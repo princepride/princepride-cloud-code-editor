@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { FiSettings } from 'react-icons/fi';
 import Offcanvas from 'react-bootstrap/Offcanvas';
-import './Button.css'
+import styles from './Button.module.css'
 import "bootstrap/dist/css/bootstrap.min.css"
 import { themeColors } from '../data/dummy';
+import Tooltip from '@mui/material/Tooltip';
+import { BsCheck } from 'react-icons/bs';
 
 
 const iconStyle = {
@@ -17,15 +19,15 @@ function Button(props) {
     const [show, setShow] = useState(false);
     return (
         <div>
-        <button className="buttonStyle" type="button" onClick={() => {setShow(true)}}>
+        <button className={styles.buttonStyle} style={{backgroundColor:setting.color}} type="button" onClick={() => {setShow(true)}}>
             <FiSettings style={iconStyle} />
         </button>
-        <Offcanvas show={show} onHide={() => setShow(false)} placement="end">
+        <Offcanvas show={show} onHide={() => setShow(false)} placement="end" style={{backgroundColor:setting.backgroundColor}}>
         <Offcanvas.Header closeButton>
-          <Offcanvas.Title>Settings</Offcanvas.Title>
+          <Offcanvas.Title style={{fontSize:'25px', fontWeight: 'bold', color:setting.theme==='vs-dark'?'white':'black'}}>Settings</Offcanvas.Title>
         </Offcanvas.Header>
         <Offcanvas.Body>
-        <div className="flex-col border-t-1 border-color p-4 ml-4">
+        {/*<div className="flex-col border-t-1 border-color p-4 ml-4">
           <p className="font-semibold text-xl ">Theme Option</p>
 
           <div className="mt-4">
@@ -38,7 +40,6 @@ function Button(props) {
               onChange={setsetting({...setting,theme:"light"})}
               checked={setsetting.theme === 'Light'}
             />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="light" className="ml-2 text-md cursor-pointer">
               Light
             </label>
@@ -53,33 +54,26 @@ function Button(props) {
               className="cursor-pointer"
               checked={setsetting.theme === 'Dark'}
             />
-            {/* eslint-disable-next-line jsx-a11y/label-has-associated-control */}
             <label htmlFor="dark" className="ml-2 text-md cursor-pointer">
               Dark
             </label>
           </div>
-        </div>
-        <div className="p-4 border-t-1 border-color ml-4">
-          <p className="font-semibold text-xl ">Theme Colors</p>
-          <div className="flex gap-3">
-            {themeColors.map((item, index) => (
-              <TooltipComponent key={index} content={item.name} position="TopCenter">
-                <div
-                  className="relative mt-2 cursor-pointer flex gap-5 items-center"
-                  key={item.name}
+        </div>*/}
+          <p style={{fontSize:'20px', color:setting.theme==='vs-dark'?'white':'black'}}>Theme Colors</p>
+        <div style={{display:'flex', gap:'15px', justifyContent: 'center'}}>
+        {themeColors.map((item, index) => (
+            <Tooltip key={index} title={item.name}>
+            <div key={item.name}>
+                <button
+                type="button"
+                style={{ backgroundColor: item.color, height: '50px', width: '50px', borderRadius: '25px', cursor: 'pointer' }}
+                onClick={() => setsetting({...setting,color:item.color})}
                 >
-                  <button
-                    type="button"
-                    className="h-10 w-10 rounded-full cursor-pointer"
-                    style={{ backgroundColor: item.color }}
-                    onClick={() => setColor(item.color)}
-                  >
-                    <BsCheck className={`ml-2 text-2xl text-white ${item.color === currentColor ? 'block' : 'hidden'}`} />
-                  </button>
-                </div>
-              </TooltipComponent>
-            ))}
-          </div>
+                <BsCheck style={{fontSize:'25px', color:'white', visibility: item.color === setting.color ? 'visible' : 'hidden'}}/>
+                </button>
+            </div>
+            </Tooltip>
+        ))}
         </div>
         </Offcanvas.Body>
       </Offcanvas>

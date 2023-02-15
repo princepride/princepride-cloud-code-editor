@@ -57,7 +57,7 @@ function CodeEditor(props) {
     };
     //vs-dark
     return (
-        <div className="code-editor">
+        <div className='codeEditor'>
             <Editor language={language} theme="vs-dark" value={value} 
                 onChange={(newValue) => {console.log(newValue)}}
                 options={{
