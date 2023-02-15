@@ -55,6 +55,7 @@ function CodeEditor(props) {
         overflowX: 'scroll', // 横向滚动条
         overflowY: 'scroll', // 竖向滚动条
     };
+    //vs-dark
     return (
         <div className="code-editor">
             <Editor language={language} theme="vs-dark" value={value} 

@@ -41,7 +41,7 @@ function App() {
           <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
           <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
         </SplitPane>
-      <Button setsetting={setsetting} />
+      <Button setsetting={setsetting} setting={setting}/>
     </div>
   );
 }
