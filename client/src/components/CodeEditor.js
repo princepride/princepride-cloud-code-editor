@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import config from '../config.json';
 import './CodeEditor.css';
-import ReactResizeDetector from 'react-resize-detector';
 
 function CodeEditor(props) {
     const {fileId, tree, setTree, setting} = props;
