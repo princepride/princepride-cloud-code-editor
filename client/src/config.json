@@ -12,11 +12,5 @@
         "rb": "ruby",
         "swift": "swift",
         "ts": "typescript"
-    },
-    "theme": {
-        "vs-dark": {
-            "color": "green",
-            "font-size": "16px"
-        }
     }
 }

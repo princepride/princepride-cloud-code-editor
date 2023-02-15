@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import CodeEditor from './components/CodeEditor';
 import FileExplorer from './components/FileExplorer';
 import initialTree from "./data/tree";
@@ -7,16 +7,25 @@ import SplitPane from "react-split-pane";
 import './App.css';
 
 const initialSetting = {
-  color: "green",
+  color: "red",
   theme: "vs-dark",
   backgroundColor: '#1a202c',
-  "font-size": "16px"
+  fontSize: "16px"
 } 
 function App() {
 
   const [fileId, setFileId] = useState("0");
   const [tree, setTree] = useState(initialTree);
   const [setting, setSetting] = useState(initialSetting);
+
+  useEffect(() =>{
+    let element1 = document.querySelector('.file-explorer-tree');
+    let element2 = document.querySelector('.code-editor');
+    element1.style.color=setting.color;
+    element1.style.backgroundColor = setting.backgroundColor;
+    element2.style.color=setting.color;
+    element2.style.backgroundColor = setting.backgroundColor;
+  },[setting])
 
   const buttonStyle = {
     position: 'fixed',
@@ -54,7 +63,7 @@ function App() {
           <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
           <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
         </SplitPane>
-      <button type="button" style={buttonStyle}><FiSettings style={iconStyle}/></button>
+      <button type="button" style={buttonStyle}><FiSettings style={iconStyle} setSetting={setSetting}/></button>
     </div>
   );
 }

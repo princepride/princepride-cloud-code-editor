@@ -5,7 +5,7 @@ import './CodeEditor.css';
 import ReactResizeDetector from 'react-resize-detector';
 
 function CodeEditor(props) {
-    const {fileId, tree, setTree} = props;
+    const {fileId, tree, setTree, setting} = props;
     const [value, setValue] = useState();
     const [language, setLanguage] = useState('javascript');
     const [editor,setEditor] = useState(null);
