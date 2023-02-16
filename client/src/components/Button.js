@@ -1,12 +1,9 @@
 import { useState } from 'react';
 import { FiSettings } from 'react-icons/fi';
-//import Offcanvas from 'react-bootstrap/Offcanvas';
 import styles from './Button.module.css'
-import "bootstrap/dist/css/bootstrap.min.css"
 import { themeColors } from '../data/dummy';
 import Tooltip from '@mui/material/Tooltip';
 import { BsCheck } from 'react-icons/bs';
-import Offcanvas from './Offcanvas'
 
 const iconStyle = {
     width: '35px',
@@ -22,7 +19,6 @@ function Button(props) {
         <button className={styles.buttonStyle} style={{backgroundColor:setting.color}} type="button" onClick={() => {setShow(true)}}>
             <FiSettings style={iconStyle} />
         </button>
-        <Offcanvas show={show}/>
         {/*<Offcanvas show={show} onHide={() => setShow(false)} placement="end" style={{backgroundColor:setting.backgroundColor}}>
         <Offcanvas.Header closeButton>
           <Offcanvas.Title style={{fontSize:'25px', fontWeight: 'bold', color:setting.theme==='vs-dark'?'white':'black'}}>Settings</Offcanvas.Title>
