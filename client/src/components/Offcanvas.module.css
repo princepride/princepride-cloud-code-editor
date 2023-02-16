@@ -1,0 +1,21 @@
+.offcanvas {
+
+}
+
+.offcanvas-animation {
+    position: relative;
+    width: 20%;
+    height: 100vh;
+    background-color: blue;
+    left: -100%;
+    animation: slide-in 1s ease-out;
+}
+
+@keyframes slide-in {
+    from {
+        transform: translateX(-100%);
+    }
+    to {
+        transform: translateX(0);
+    }
+}
