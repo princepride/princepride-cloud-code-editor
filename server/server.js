@@ -2,6 +2,10 @@ const mongoose = require('mongoose')
 const Project = require('./Project')
 const config = require('./config.json')
 
+
+// should implete these action: 
+// rename(id, newname), delete(id, ""), 
+// edit code(id, newCodes), addItem((folder, file), name),
 mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://localhost/princepride-project-clone")
 
@@ -18,10 +22,10 @@ io.on("connection", socket => {
   socket.on("get-project", async projectId => {
     const project = await findOrCreateProject(projectId)
     socket.join(projectId)
-    socket.emit("load-document", document.data)
+    socket.emit("load-project", project.data)
 
-    socket.on("send-changes", delta => {
-      socket.broadcast.to(projectId).emit("receive-changes", delta)
+    socket.on("send-changes", (id, newItem) => {
+      socket.broadcast.to(projectId).emit("receive-changes", id, newItem)
     })
 
     socket.on("save-project", async data => {

@@ -144,7 +144,6 @@ class FileExplorer extends Component {
 
   handleContextClick = (e, { action, name: id }) => {
     const { tree } = this.state;
-    console.log(e);
 
     switch (action) {
       case "rename":
