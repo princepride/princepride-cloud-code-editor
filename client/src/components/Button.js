@@ -39,7 +39,6 @@ const iconStyle = {
     },
     bmMenu: {
       background: '#373a47',
-      padding: '2.5em 1.5em 0',
       fontSize: '1.15em'
     },
     bmMorphShape: {
@@ -66,21 +65,38 @@ function Button(props) {
             <FiSettings style={iconStyle} />
         </button>
         <Menu width={ '20%' } isOpen={ show } styles={menuStyles} customBurgerIcon={ false } right onClose={()=>setShow(false)}>
-        <p style={{fontSize:'20px', color:setting.theme==='vs-dark'?'white':'black'}}>Theme Colors</p>
-        <div style={{display:'flex', gap:'15px', justifyContent: 'center'}}>
-        {themeColors.map((item, index) => (
-            <Tooltip key={index} title={item.name}>
-            <div key={item.name}>
-                <button
-                type="button"
-                style={{ backgroundColor: item.color, height: '50px', width: '50px', borderRadius: '25px', cursor: 'pointer' }}
-                onClick={() => setsetting({...setting,color:item.color})}
-                >
-                <BsCheck style={{fontSize:'25px', color:'white', visibility: item.color === setting.color ? 'visible' : 'hidden'}}/>
-                </button>
-            </div>
-            </Tooltip>
-        ))}
+        <div>
+          <div style={{fontSize:'3vw', color:setting.theme==='vs-dark'?'white':'black', marginBottom:'10vh'}}>Settings</div>
+          <div style={{marginBottom:'10vh'}}>
+          <p style={{fontSize:'2vw', color:setting.theme==='vs-dark'?'white':'black'}}>Theme</p>
+          <label style={{fontSize:'30px', display:'flex'}}>
+            <input style={{width:'3vw', height:'3vh'}} type="radio" name="fruit" value="vs-dark" checked />
+            <div style={{fontSize:'1.5vw'}}>vs-dark</div>
+            <input style={{width:'3vw', height:'3vh'}} type="radio" name="fruit" value="light" />
+            <div style={{fontSize:'1.5vw'}}>light</div>
+          </label>
+          </div>
+          <div style={{marginBottom:'10vh'}}>
+          <p style={{fontSize:'2vw', color:setting.theme==='vs-dark'?'white':'black'}}>Theme Colors</p>
+          <div style={{display:'flex', gap:'12px', justifyContent: 'center'}}>
+          {themeColors.map((item, index) => (
+              <Tooltip key={index} title={item.name}>
+              <div key={item.name}>
+                  <button
+                  type="button"
+                  style={{ backgroundColor: item.color, height: '50px', width: '50px', borderRadius: '25px', cursor: 'pointer' }}
+                  onClick={() => setsetting({...setting,color:item.color})}
+                  >
+                  <BsCheck style={{fontSize:'25px', color:'white', visibility: item.color === setting.color ? 'visible' : 'hidden'}}/>
+                  </button>
+              </div>
+              </Tooltip>
+          ))}
+          </div>
+          </div>
+          <div style={{marginBottom:'10vh'}}>
+          <p style={{fontSize:'2vw', color:setting.theme==='vs-dark'?'white':'black'}}>Font Size</p>
+          </div>
         </div>
         </Menu>
         {/*<Offcanvas show={show} onHide={() => setShow(false)} placement="end" style={{backgroundColor:setting.backgroundColor}}>

@@ -5,7 +5,8 @@ const config = require('./config.json')
 
 // should implete these action: 
 // rename(id, newname), delete(id, ""), 
-// edit code(id, newCodes), addItem((folder, file), name),
+// edit code(id, newCodes), addItem((folder, file), newname),
+// upload new project(id, newProject)
 mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://localhost/princepride-project-clone")
 
