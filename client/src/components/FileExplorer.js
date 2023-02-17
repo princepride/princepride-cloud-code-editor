@@ -206,6 +206,7 @@ class FileExplorer extends Component {
     return (
       <div>
         <div className="file-explorer-tree">
+        <button>Test</button>
           <Toolbar>
             <FloatLeft>
               <Icon
@@ -227,14 +228,6 @@ class FileExplorer extends Component {
             </StrollableContainer>
           )}
         </div>
-        {/*<div
-          className="inspector"
-          style={{ overflow: "hidden", height: "100vh" }}
-        >
-          <StrollableContainer draggable>
-            <pre>{JSON.stringify(this.state.tree, null, "  ")}</pre>
-          </StrollableContainer>
-        </div>*/}
 
         <ContextMenu id="FILE_CONTEXT_MENU">
           <MenuItem

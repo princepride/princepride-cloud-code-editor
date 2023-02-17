@@ -68,7 +68,7 @@ function Button(props) {
         <div>
           <div style={{fontSize:'3vw', color:setting.theme==='vs-dark'?'white':'black', marginBottom:'10vh'}}>Settings</div>
           <div style={{marginBottom:'10vh'}}>
-          <p style={{fontSize:'2vw', color:setting.theme==='vs-dark'?'white':'black'}}>Theme</p>
+          <p style={{fontSize:'1.8vw', color:setting.theme==='vs-dark'?'white':'black'}}>Theme</p>
           <label style={{fontSize:'30px', display:'flex'}}>
             <input style={{width:'3vw', height:'3vh'}} type="radio" name="fruit" value="vs-dark" checked />
             <div style={{fontSize:'1.5vw'}}>vs-dark</div>
@@ -77,7 +77,7 @@ function Button(props) {
           </label>
           </div>
           <div style={{marginBottom:'10vh'}}>
-          <p style={{fontSize:'2vw', color:setting.theme==='vs-dark'?'white':'black'}}>Theme Colors</p>
+          <p style={{fontSize:'1.8vw', color:setting.theme==='vs-dark'?'white':'black'}}>Theme Colors</p>
           <div style={{display:'flex', gap:'12px', justifyContent: 'center'}}>
           {themeColors.map((item, index) => (
               <Tooltip key={index} title={item.name}>
@@ -95,7 +95,7 @@ function Button(props) {
           </div>
           </div>
           <div style={{marginBottom:'10vh'}}>
-          <p style={{fontSize:'2vw', color:setting.theme==='vs-dark'?'white':'black'}}>Font Size</p>
+          <p style={{fontSize:'1.8vw', color:setting.theme==='vs-dark'?'white':'black'}}>Font Size</p>
           </div>
         </div>
         </Menu>
