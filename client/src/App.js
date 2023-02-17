@@ -2,7 +2,7 @@ import { useState, useEffect } from 'react';
 import CodeEditor from './components/CodeEditor';
 import FileExplorer from './components/FileExplorer';
 import initialTree from "./data/tree";
-import Button from "./components/Button";
+import OffCanvas from "./components/OffCanvas";
 import SplitPane from "react-split-pane";
 import './App.css';
 
@@ -39,7 +39,7 @@ function App() {
         <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
         <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
       </SplitPane>
-      <Button setsetting={setsetting} setting={setting}/>
+      <OffCanvas setsetting={setsetting} setting={setting}/>
     </div>
   );
 }

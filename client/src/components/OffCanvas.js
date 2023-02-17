@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { FiSettings } from 'react-icons/fi';
-import styles from './Button.module.css'
+import styles from './OffCanvas.module.css'
 import { themeColors } from '../data/dummy';
 import Tooltip from '@mui/material/Tooltip';
 import { BsCheck } from 'react-icons/bs';
@@ -56,7 +56,7 @@ const iconStyle = {
     }
   }
 
-function Button(props) {
+function OffCanvas(props) {
     const { setsetting, setting } = props;
     const [show, setShow] = useState(false);
     return (
@@ -103,7 +103,7 @@ function Button(props) {
     );
 }
 
-export default Button;
+export default OffCanvas;
 
         {/*<div className="flex-col border-t-1 border-color p-4 ml-4">
           <p className="font-semibold text-xl ">Theme Option</p>
