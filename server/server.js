@@ -16,7 +16,12 @@ const io = require("socket.io")(3001, {
   },
 })
 
-const defaultValue = ""
+const defaultValue = {
+    module: "project",
+    id: "root-0",
+    children: [],
+    "collapsed": false,
+}
 
 io.on("connection", socket => {
   socket.on("get-project", async projectId => {
