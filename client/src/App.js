@@ -33,7 +33,7 @@ function App() {
         split="vertical"
         minSize={100}
         maxSize={-100}
-        defaultSize={"20%"}
+        defaultSize={"15%"}
         style={{"width":"100vw"}}
       >
         <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>

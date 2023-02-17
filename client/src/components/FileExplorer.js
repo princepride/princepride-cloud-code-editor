@@ -206,7 +206,10 @@ class FileExplorer extends Component {
     return (
       <div>
         <div className="file-explorer-tree">
-        <button>Test</button>
+        <div style={{display:"flex",justifyContent:"space-evenly"}}>
+        <button id="importButton" style={{borderRadius:'8px',height:'3vh'}}><div style={{padding:"0 2vh 0 2vh"}}>Import</div></button>
+        <button id="exportButton" style={{borderRadius:'8px',height:'3vh'}}><div style={{padding:"0 2vh 0 2vh"}}>Export</div></button>
+        </div>
           <Toolbar>
             <FloatLeft>
               <Icon
