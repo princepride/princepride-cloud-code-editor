@@ -149,3 +149,9 @@
     display: inline-block;
     position: absolute;
   }
+
+  .react-contextmenu.react-contextmenu--visible {
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 9999;
+  }

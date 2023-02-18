@@ -1,23 +1,13 @@
 import React from 'react';
+import styles from './LanguageLabel.module.css'
 
-const styles = {
-    position: 'fixed',
-    top: '25px',
-    right: '90px',
-    width: '200px',
-    height: '50px',
-    borderRadius: '25px',
-    color: 'white',
-    textAlign: 'center',
-    cursor: 'pointer'
-}
 
 function LanguageLabel(props) {
     const { setting } = props;
 
     return (
-        <div style={styles}>
-            {setting.language}
+        <div className={styles.labelStyle} style={{backgroundColor:setting.color}}>
+            <div style={{fontSize:"26px",marginTop:"7px"}}>{setting.language}</div>
         </div>
     );
 }
