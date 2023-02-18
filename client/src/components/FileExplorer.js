@@ -54,7 +54,7 @@ class FileExplorer extends Component {
 
   renderNode = (node) => {
     const renderFileFolderToolbar = (isFolder, caption) => (
-      <Toolbar>
+      <Toolbar style={{color: this.props.setting.theme === 'vs-dark'?"#d8e0f0":"#404040"}}>
         <FloatLeft>
           <Icon icon={isFolder ? folder : file} />
           {caption}
@@ -210,7 +210,7 @@ class FileExplorer extends Component {
         <button id="importButton" style={{borderRadius:'8px',height:'3vh'}}><div style={{padding:"0 2vh 0 2vh"}}>Import</div></button>
         <button id="exportButton" style={{borderRadius:'8px',height:'3vh'}}><div style={{padding:"0 2vh 0 2vh"}}>Export</div></button>
         </div>
-          <Toolbar>
+          <Toolbar style={{color: this.props.setting.theme === 'vs-dark'?"#d8e0f0":"#404040"}}>
             <FloatLeft>
               <Icon
                 title={collapsed ? "expand" : "collapse"}
@@ -274,7 +274,7 @@ const LightScrollbar = styled.div`
 const Toolbar = styled.div`
   position: relative;
   display: flex;
-  color: #d8e0f0;
+  ${'' /*color: #d8e0f0;*/}
   z-index: +1;
   /*border: 1px solid white;*/
   padding-bottom: 4px;

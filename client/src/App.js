@@ -38,7 +38,7 @@ function App() {
         defaultSize={"15%"}
         style={{"width":"100vw"}}
       >
-        <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
+        <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree} setting={setting}/>
         <CodeEditor fileId={fileId} tree={tree} setTree={setTree} setSetting={setSetting} setting={setting}/>
       </SplitPane>
       <OffCanvas setSetting={setSetting} setting={setting}/>

@@ -12,57 +12,53 @@ const iconStyle = {
     display: 'flex'
   }
 
-  let menuStyles = {
-    bmBurgerButton: {
-      position: 'fixed',
-      width: '36px',
-      height: '30px',
-      left: '36px',
-      top: '36px'
-    },
-    bmBurgerBars: {
-      background: '#373a47'
-    },
-    bmBurgerBarsHover: {
-      background: '#a90000'
-    },
-    bmCrossButton: {
-      height: '24px',
-      width: '24px'
-    },
-    bmCross: {
-      background: '#bdc3c7'
-    },
-    bmMenuWrap: {
-      position: 'fixed',
-      height: '100%'
-    },
-    bmMenu: {
-      background: '#373a47',
-      fontSize: '1.15em'
-    },
-    bmMorphShape: {
-      fill: '#373a47'
-    },
-    bmItemList: {
-      color: '#b8b7ad',
-      padding: '0.8em'
-    },
-    bmItem: {
-      display: 'inline-block'
-    },
-    bmOverlay: {
-      background: 'rgba(0, 0, 0, 0.3)'
-    }
-  }
-
-const handleRadioChecked = () => {
-
-}
-
 function OffCanvas(props) {
     const { setSetting, setting } = props;
     const [show, setShow] = useState(false);
+
+    const menuStyles = {
+      bmBurgerButton: {
+        position: 'fixed',
+        width: '36px',
+        height: '30px',
+        left: '36px',
+        top: '36px'
+      },
+      bmBurgerBars: {
+        background: '#373a47'
+      },
+      bmBurgerBarsHover: {
+        background: '#a90000'
+      },
+      bmCrossButton: {
+        height: '24px',
+        width: '24px'
+      },
+      bmCross: {
+        background: '#bdc3c7'
+      },
+      bmMenuWrap: {
+        position: 'fixed',
+        height: '100%'
+      },
+      bmMenu: {
+        background: setting.theme === 'vs-dark'?'#373a47':'#dddddd',
+        fontSize: '1.15em'
+      },
+      bmMorphShape: {
+        fill: '#373a47'
+      },
+      bmItemList: {
+        color: '#b8b7ad',
+        padding: '0.8em'
+      },
+      bmItem: {
+        display: 'inline-block'
+      },
+      bmOverlay: {
+        background: 'rgba(0, 0, 0, 0.3)'
+      }
+    }
     return (
         <div>
         <button className={styles.buttonStyle} style={{backgroundColor:setting.color}} type="button" onClick={() => {setShow(true)}}>
