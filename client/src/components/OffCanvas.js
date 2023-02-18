@@ -56,6 +56,10 @@ const iconStyle = {
     }
   }
 
+const handleRadioChecked = () => {
+
+}
+
 function OffCanvas(props) {
     const { setSetting, setting } = props;
     const [show, setShow] = useState(false);
@@ -70,9 +74,11 @@ function OffCanvas(props) {
           <div style={{marginBottom:'10vh'}}>
           <p style={{fontSize:'1.8vw', color:setting.theme==='vs-dark'?'white':'black'}}>Theme</p>
           <label style={{fontSize:'30px', display:'flex'}}>
-            <input style={{width:'3vw', height:'3vh'}} type="radio" name="fruit" value="vs-dark" checked />
+            <input style={{width:'3vw', height:'3vh'}} type="radio" name="fruit" value="vs-dark" onChange={()=>setSetting({...setting,theme:"vs-dark"})}
+              checked={setting.theme === 'vs-dark'}/>
             <div style={{fontSize:'1.5vw'}}>vs-dark</div>
-            <input style={{width:'3vw', height:'3vh'}} type="radio" name="fruit" value="light" />
+            <input style={{width:'3vw', height:'3vh'}} type="radio" name="fruit" value="light" onChange={()=>setSetting({...setting,theme:"light"})}
+            checked={setting.theme === 'light'}/>
             <div style={{fontSize:'1.5vw'}}>light</div>
           </label>
           </div>

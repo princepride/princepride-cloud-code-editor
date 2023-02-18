@@ -8,10 +8,10 @@ import RunButton from "./components/RunButton";
 import LanguageLabel from "./components/LanguageLabel";
 import './App.css';
 
+// theme:vs-dark => '#1a202c' light => '#ffffff'
 const initialSetting = {
   color: '#ff0000',
   theme: "vs-dark",
-  backgroundColor: '#1a202c',
   fontSize: "16px",
   language: "javascript"
 } 
@@ -23,11 +23,10 @@ function App() {
 
   useEffect(() =>{
     let element1 = document.querySelector('.file-explorer-tree');
-    let element2 = document.querySelector('.codeEditor');
+    let element2 = document.querySelector('body');
     element1.style.color=setting.color;
-    element1.style.backgroundColor = setting.backgroundColor;
-    element2.style.color=setting.color;
-    element2.style.backgroundColor = setting.backgroundColor;
+    element1.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
+    element2.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
   },[setting])
 
   return (

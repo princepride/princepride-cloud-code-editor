@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
 import {languageSuffix} from '../data/dummy.js';
-import './CodeEditor.css';
+import styles from './CodeEditor.module.css';
 
 function CodeEditor(props) {
     const {fileId, tree, setTree, setting, setSetting} = props;
@@ -57,8 +57,8 @@ function CodeEditor(props) {
     };
     //vs-dark
     return (
-        <div className='codeEditor'>
-            <Editor language={setting.language} theme="vs-dark" value={value} 
+        <div className={styles.codeEditor} style={{backgroundColor:setting.theme==='vs-dark'?'#1a202c':'#ffffff',color:setting.color}}>
+            <Editor language={setting.language} theme={setting.theme} value={value} 
                 onChange={(newValue) => {console.log(newValue)}}
                 options={{
                 selectOnLineNumbers: true

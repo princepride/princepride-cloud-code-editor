@@ -7,7 +7,7 @@ function LanguageLabel(props) {
 
     return (
         <div className={styles.labelStyle} style={{backgroundColor:setting.color}}>
-            <div style={{fontSize:"26px",marginTop:"7px"}}>{setting.language}</div>
+            <div style={{fontSize:"26px",marginTop:"9px"}}>{setting.language}</div>
         </div>
     );
 }
