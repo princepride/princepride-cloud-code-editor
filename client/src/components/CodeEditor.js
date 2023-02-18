@@ -1,12 +1,12 @@
 import { useEffect, useState } from 'react';
 import Editor from '@monaco-editor/react';
-import config from '../config.json';
+import {languageSuffix} from '../data/dummy.js';
 import './CodeEditor.css';
 
 function CodeEditor(props) {
-    const {fileId, tree, setTree, setting} = props;
+    const {fileId, tree, setTree, setting, setSetting} = props;
     const [value, setValue] = useState();
-    const [language, setLanguage] = useState('javascript');
+    //const [language, setLanguage] = useState('javascript');
     const [editor,setEditor] = useState(null);
 
     useEffect(() => {
@@ -17,7 +17,7 @@ function CodeEditor(props) {
         setValue(node.context);
         let filename = node.module;
         let fileSuffix = filename.split('.').pop();
-        setLanguage(config.languageSuffix[fileSuffix])
+        setSetting({...setting,language : languageSuffix[fileSuffix]})
     }, [fileId])
 
     const findNode = (root, targetId) => {
@@ -58,7 +58,7 @@ function CodeEditor(props) {
     //vs-dark
     return (
         <div className='codeEditor'>
-            <Editor language={language} theme="vs-dark" value={value} 
+            <Editor language={setting.language} theme="vs-dark" value={value} 
                 onChange={(newValue) => {console.log(newValue)}}
                 options={{
                 selectOnLineNumbers: true

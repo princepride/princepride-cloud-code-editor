@@ -57,7 +57,7 @@ const iconStyle = {
   }
 
 function OffCanvas(props) {
-    const { setsetting, setting } = props;
+    const { setSetting, setting } = props;
     const [show, setShow] = useState(false);
     return (
         <div>
@@ -85,7 +85,7 @@ function OffCanvas(props) {
                   <button
                   type="button"
                   style={{ backgroundColor: item.color, height: '50px', width: '50px', borderRadius: '25px', cursor: 'pointer' }}
-                  onClick={() => setsetting({...setting,color:item.color})}
+                  onClick={() => setSetting({...setting,color:item.color})}
                   >
                   <BsCheck style={{fontSize:'25px', color:'white', visibility: item.color === setting.color ? 'visible' : 'hidden'}}/>
                   </button>

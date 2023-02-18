@@ -5,19 +5,21 @@ import initialTree from "./data/tree";
 import OffCanvas from "./components/OffCanvas";
 import SplitPane from "react-split-pane";
 import RunButton from "./components/RunButton";
+import LanguageLabel from "./components/LanguageLabel";
 import './App.css';
 
 const initialSetting = {
   color: '#ff0000',
   theme: "vs-dark",
   backgroundColor: '#1a202c',
-  fontSize: "16px"
+  fontSize: "16px",
+  language: "javascript"
 } 
 function App() {
 
   const [fileId, setFileId] = useState("0");
   const [tree, setTree] = useState(initialTree);
-  const [setting, setsetting] = useState(initialSetting);
+  const [setting, setSetting] = useState(initialSetting);
 
   useEffect(() =>{
     let element1 = document.querySelector('.file-explorer-tree');
@@ -38,10 +40,11 @@ function App() {
         style={{"width":"100vw"}}
       >
         <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree}/>
-        <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
+        <CodeEditor fileId={fileId} tree={tree} setTree={setTree} setSetting={setSetting} setting={setting}/>
       </SplitPane>
-      <OffCanvas setsetting={setsetting} setting={setting}/>
+      <OffCanvas setSetting={setSetting} setting={setting}/>
       <RunButton setting={setting}/>
+      <LanguageLabel setting={setting}/>
     </div>
   );
 }

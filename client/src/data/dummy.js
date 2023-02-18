@@ -24,3 +24,17 @@ export const themeColors = [
       color: '#ff0000',
     },
   ];
+
+  export const languageSuffix = {
+    "cpp": "cpp",
+    "cs": "csharp",
+    "go": "go",
+    "java": "java",
+    "js": "javascript",
+    "kt": "kotlin",
+    "php": "php",
+    "py": "python",
+    "rb": "ruby",
+    "swift": "swift",
+    "ts": "typescript"
+}
