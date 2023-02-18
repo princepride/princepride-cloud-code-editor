@@ -59,9 +59,10 @@ function CodeEditor(props) {
     return (
         <div className={styles.codeEditor} style={{backgroundColor:setting.theme==='vs-dark'?'#1a202c':'#ffffff',color:setting.color}}>
             <Editor language={setting.language} theme={setting.theme} value={value} 
-                onChange={(newValue) => {console.log(newValue)}}
+                onChange={(newValue) => {console.log(newValue)}} 
                 options={{
-                selectOnLineNumbers: true
+                selectOnLineNumbers: true,
+                fontSize: setting.fontSize,
             }}/>
             {/*</ReactResizeDetector>*/}
         </div>

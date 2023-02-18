@@ -12,7 +12,7 @@ import './App.css';
 const initialSetting = {
   color: '#ff0000',
   theme: "vs-dark",
-  fontSize: "16px",
+  fontSize: "26",
   language: "javascript"
 } 
 function App() {
