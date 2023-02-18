@@ -4,6 +4,7 @@ import FileExplorer from './components/FileExplorer';
 import initialTree from "./data/tree";
 import OffCanvas from "./components/OffCanvas";
 import SplitPane from "react-split-pane";
+import RunButton from "./components/RunButton";
 import './App.css';
 
 const initialSetting = {
@@ -40,6 +41,7 @@ function App() {
         <CodeEditor fileId={fileId} tree={tree} setTree={setTree}/>
       </SplitPane>
       <OffCanvas setsetting={setsetting} setting={setting}/>
+      <RunButton setting={setting}/>
     </div>
   );
 }
