@@ -11,6 +11,7 @@ import {io} from 'socket.io-client';
 import { useParams } from 'react-router-dom';
 import config from '../config.json';
 
+const SAVE_INTERVAL_MS = 2000
 const initialSetting = {
   color: '#ff0000',
   theme: "vs-dark",
@@ -18,7 +19,7 @@ const initialSetting = {
   language: "javascript"
 } 
 function Canvas() {
-
+  const {id: projectId} = useParams();
   const [fileId, setFileId] = useState("0");
   const [tree, setTree] = useState(initialTree);
   const [setting, setSetting] = useState(initialSetting);
@@ -32,6 +33,16 @@ function Canvas() {
     }
 }, [])
 
+useEffect(() => {
+    console.log(socket)
+    if (socket == null || tree == null) return
+    
+    socket.once("load-project", project => {
+        setTree(project)
+    })
+    socket.emit('get-project', projectId)
+},[socket, tree, projectId])
+
   useEffect(() =>{
     let element1 = document.querySelector('.file-explorer-tree');
     let element2 = document.querySelector('body');
@@ -39,6 +50,35 @@ function Canvas() {
     element1.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
     element2.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
   },[setting])
+
+  useEffect(() => {
+    if (socket == null || tree == null) return
+
+    const interval = setInterval(() => {
+      socket.emit("save-project", tree)
+    }, SAVE_INTERVAL_MS)
+
+    return () => {
+      clearInterval(interval)
+    }
+  }, [socket, tree])
+
+  useEffect(() => {
+    if (socket == null || tree == null) return
+    const handler = (action, id, newItem) => {
+        // rename(id, newname), delete(id, ""), 
+        // edit code(id, newCodes), addItem((folder, file), newname),
+        // upload new project(id, newProject)
+    }
+}, [socket, tree])
+
+useEffect(() => {
+    if (socket == null || tree == null) return
+    const handler = (delta, oldDelta, source) => {
+        if (source !== 'user') return
+        socket.emit("send-changes",delta)
+    }
+}, [socket, tree])
 
   return (
     <div>
