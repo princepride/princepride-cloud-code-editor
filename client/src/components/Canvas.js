@@ -7,8 +7,10 @@ import SplitPane from "react-split-pane";
 import RunButton from "./RunButton";
 import LanguageLabel from "./LanguageLabel";
 import './Canvas.css';
+import {io} from 'socket.io-client';
+import { useParams } from 'react-router-dom';
+import config from '../config.json';
 
-// theme:vs-dark => '#1a202c' light => '#ffffff'
 const initialSetting = {
   color: '#ff0000',
   theme: "vs-dark",
@@ -20,6 +22,15 @@ function Canvas() {
   const [fileId, setFileId] = useState("0");
   const [tree, setTree] = useState(initialTree);
   const [setting, setSetting] = useState(initialSetting);
+  const [socket, setSocket] = useState();
+
+  useEffect(() => {
+    const s = io("http://"+config.url+":3001")
+    setSocket(s)
+    return () => {
+        s.disconnect()
+    }
+}, [])
 
   useEffect(() =>{
     let element1 = document.querySelector('.file-explorer-tree');
