@@ -62,7 +62,7 @@ function CodeEditor(props) {
                 onChange={(newValue) => {console.log(newValue)}} 
                 options={{
                 selectOnLineNumbers: true,
-                fontSize: setting.fontSize,
+                fontSize: setting.fontSize[0],
             }}/>
             {/*</ReactResizeDetector>*/}
         </div>
