@@ -208,10 +208,25 @@ class FileExplorer extends Component {
     return (
       <div>
         <div className="file-explorer-tree">
-        <div style={{display:"flex",justifyContent:"space-evenly"}}>
-        <button id="importButton" style={{borderRadius:'8px',height:'3vh'}}><div style={{padding:"0 2vh 0 2vh"}}>Import</div></button>
-        <button id="exportButton" style={{borderRadius:'8px',height:'3vh'}} onClick={() => {handleExport(this.props.tree)}}><div style={{padding:"0 2vh 0 2vh"}}>Export</div></button>
-        </div>
+          <div style={{display:"flex",justifyContent:"space-evenly"}}>
+            <button id="importButton" 
+            style={{borderRadius:'8px',
+            height:'3vh',
+            backgroundColor:this.props.setting.color}}>
+              <div style={{padding:"0 2vh 0 2vh",color:'#ffffff'}}>
+                Import
+              </div>
+            </button>
+            <button id="exportButton" 
+            style={{borderRadius:'8px',
+            height:'3vh',
+            backgroundColor:this.props.setting.color}} 
+            onClick={() => {handleExport(this.props.tree)}}>
+              <div style={{padding:"0 2vh 0 2vh",color:'#ffffff'}}>
+                Export
+              </div>
+            </button>
+          </div>
           <Toolbar style={{color: this.props.setting.theme === 'vs-dark'?"#d8e0f0":"#404040"}}>
             <FloatLeft>
               <Icon
