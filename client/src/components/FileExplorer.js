@@ -66,12 +66,14 @@ class FileExplorer extends Component {
             <Fragment>
               <Icon
                 title="New Folder"
-                icon={folderPlus}
+                icon={folderPlus} 
+                style={{color:this.props.setting.theme === 'vs-dark'?'#d8e0f0':'#404040'}}
                 onClick={() => this.addItem("folder", node)}
               />
               <Icon
                 title="New File"
                 icon={filePlus}
+                style={{color:this.props.setting.theme === 'vs-dark'?'#d8e0f0':'#404040'}}
                 onClick={() => this.addItem("file", node)}
               />
             </Fragment>
@@ -321,7 +323,6 @@ const LightScrollbar = styled.div`
 const Toolbar = styled.div`
   position: relative;
   display: flex;
-  ${'' /*color: #d8e0f0;*/}
   z-index: +1;
   /*border: 1px solid white;*/
   padding-bottom: 4px;

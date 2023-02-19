@@ -17,7 +17,7 @@ function CodeEditor(props) {
         setValue(node.context);
         let filename = node.module;
         let fileSuffix = filename.split('.').pop();
-        setSetting({...setting,language : languageSuffix[fileSuffix]})
+        setSetting({...setting,language : languageSuffix[fileSuffix] || 'markdown'})
     }, [fileId])
 
     const findNode = (root, targetId) => {
