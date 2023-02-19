@@ -269,26 +269,25 @@ class FileExplorer extends Component {
 async function objectToZip(obj) {
   const zip = new JSZip();
   await buildZip(zip, obj, "");
-
   const zipBlob = await zip.generateAsync({ type: "blob" });
   saveAs(zipBlob, "tree.zip");
 }
 
 async function buildZip(zip, obj, path) {
-  if (obj.module) {
+  if (!obj.children) {
     // Create a file with the specified context
-    const filePath = `${path}/${obj.module}`;
-    console.log(`Creating file: ${filePath}`);
+    const filePath = `${obj.module}`;
+    //console.log(`Creating file: ${filePath}`);
     zip.file(filePath, obj.context || "");
   } else {
     // Create a directory and recurse
-    const dirPath = `${path}/${obj.id}`;
-    console.log(`Creating directory: ${dirPath}`);
+    const dirPath = `${obj.module}`;
+    //console.log(`Creating directory: ${dirPath}`);
     const dir = zip.folder(dirPath);
 
     // Recurse on the children
     for (const child of obj.children) {
-      await buildZip(dir, child, dirPath);
+      await buildZip(dir, child);
     }
   }
 }
