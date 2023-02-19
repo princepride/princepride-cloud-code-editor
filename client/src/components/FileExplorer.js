@@ -14,6 +14,8 @@ import { ContextMenu, MenuItem, ContextMenuTrigger } from "react-contextmenu";
 import _ from "lodash";
 import { StrollableContainer } from "react-stroller";
 import deepdash from "deepdash";
+import * as JSZip from 'jszip';
+import { saveAs } from 'file-saver';
 
 import "react-ui-tree/dist/react-ui-tree.css";
 import "./FileExplorer.css";
@@ -208,7 +210,7 @@ class FileExplorer extends Component {
         <div className="file-explorer-tree">
         <div style={{display:"flex",justifyContent:"space-evenly"}}>
         <button id="importButton" style={{borderRadius:'8px',height:'3vh'}}><div style={{padding:"0 2vh 0 2vh"}}>Import</div></button>
-        <button id="exportButton" style={{borderRadius:'8px',height:'3vh'}}><div style={{padding:"0 2vh 0 2vh"}}>Export</div></button>
+        <button id="exportButton" style={{borderRadius:'8px',height:'3vh'}} onClick={() => {handleExport(this.props.tree)}}><div style={{padding:"0 2vh 0 2vh"}}>Export</div></button>
         </div>
           <Toolbar style={{color: this.props.setting.theme === 'vs-dark'?"#d8e0f0":"#404040"}}>
             <FloatLeft>
@@ -262,6 +264,37 @@ class FileExplorer extends Component {
     });
     this.props.setTree(this.state.tree);
   };
+}
+
+async function objectToZip(obj) {
+  const zip = new JSZip();
+  await buildZip(zip, obj, "");
+
+  const zipBlob = await zip.generateAsync({ type: "blob" });
+  saveAs(zipBlob, "tree.zip");
+}
+
+async function buildZip(zip, obj, path) {
+  if (obj.module) {
+    // Create a file with the specified context
+    const filePath = `${path}/${obj.module}`;
+    console.log(`Creating file: ${filePath}`);
+    zip.file(filePath, obj.context || "");
+  } else {
+    // Create a directory and recurse
+    const dirPath = `${path}/${obj.id}`;
+    console.log(`Creating directory: ${dirPath}`);
+    const dir = zip.folder(dirPath);
+
+    // Recurse on the children
+    for (const child of obj.children) {
+      await buildZip(dir, child, dirPath);
+    }
+  }
+}
+
+const handleExport = (obj) => {
+  objectToZip(obj)
 }
 
 const LightScrollbar = styled.div`
