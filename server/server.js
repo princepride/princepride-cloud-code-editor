@@ -30,8 +30,8 @@ io.on("connection", socket => {
     socket.join(projectId)
     socket.emit("load-project", project.data)
 
-    socket.on("send-changes", (id, newItem) => {
-      socket.broadcast.to(projectId).emit("receive-changes", id, newItem)
+    socket.on("send-changes", (action, id, newItem) => {
+      socket.broadcast.to(projectId).emit("receive-changes", action, id, newItem)
     })
 
     socket.on("save-project", async data => {
