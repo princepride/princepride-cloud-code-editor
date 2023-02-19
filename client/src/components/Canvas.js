@@ -19,11 +19,91 @@ const initialSetting = {
   language: "javascript"
 } 
 function Canvas() {
-  const {id: projectId} = useParams();
   const [fileId, setFileId] = useState("5");
-  const [tree, setTree] = useState(initialTree);
+  //const [tree, setTree] = useState(initialTree);
   const [setting, setSetting] = useState(initialSetting);
+  
+  const {id: projectId} = useParams();
   const [socket, setSocket] = useState();
+  const [tree, setTree] = useState();
+
+  useEffect(() => {
+    const s = io("http://"+config.url+":3001")
+    setSocket(s)
+    return () => {
+        s.disconnect()
+    }
+}, [])
+
+useEffect(() => {
+  console.log(socket)
+  if (socket == null) return
+  
+  socket.once("load-project", project => {
+      setTree(project)
+  })
+  socket.emit('get-project', projectId)
+},[socket, tree, projectId])
+
+useEffect(() => {
+  if (socket == null) return
+
+  const interval = setInterval(() => {
+    socket.emit("save-project", tree)
+  }, SAVE_INTERVAL_MS)
+
+  return () => {
+    clearInterval(interval)
+  }
+}, [socket, tree])
+
+useEffect(() => {
+  if (socket == null ) return
+  const handler = (project) => {
+      setTree(project)
+  }
+  socket.on("receive-changes", handler)
+
+  return () => {
+    socket.off('receive-changes',handler)
+  }
+}, [socket, tree])
+
+useEffect(() => {
+  if (socket == null) return
+  socket.emit("send-changes",tree)
+
+}, [socket, tree])
+
+useEffect(() =>{
+  let element1 = document.querySelector('.file-explorer-tree');
+  let element2 = document.querySelector('body');
+  element1.style.color=setting.color;
+  element1.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
+  element2.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
+},[setting])
+
+  return (
+    <div>
+      <SplitPane
+        split="vertical"
+        minSize={100}
+        maxSize={-100}
+        defaultSize={"15%"}
+        style={{"width":"100vw"}}
+      >
+        <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree} setting={setting}/>
+        <CodeEditor fileId={fileId} tree={tree} setTree={setTree} setSetting={setSetting} setting={setting}/>
+      </SplitPane>
+      <OffCanvas setSetting={setSetting} setting={setting}/>
+      <RunButton setting={setting}/>
+      <LanguageLabel setting={setting}/>
+    </div>
+  );
+}
+
+export default Canvas;
+
 
 //  useEffect(() => {
 //    const s = io("http://"+config.url+":3001")
@@ -71,33 +151,3 @@ function Canvas() {
 //        socket.emit("send-changes",delta)
 //    }
 //}, [socket, tree])
-
-
-useEffect(() =>{
-  let element1 = document.querySelector('.file-explorer-tree');
-  let element2 = document.querySelector('body');
-  element1.style.color=setting.color;
-  element1.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
-  element2.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
-},[setting])
-
-  return (
-    <div>
-      <SplitPane
-        split="vertical"
-        minSize={100}
-        maxSize={-100}
-        defaultSize={"15%"}
-        style={{"width":"100vw"}}
-      >
-        <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree} setting={setting}/>
-        <CodeEditor fileId={fileId} tree={tree} setTree={setTree} setSetting={setSetting} setting={setting}/>
-      </SplitPane>
-      <OffCanvas setSetting={setSetting} setting={setting}/>
-      <RunButton setting={setting}/>
-      <LanguageLabel setting={setting}/>
-    </div>
-  );
-}
-
-export default Canvas;

@@ -14,7 +14,7 @@ function CodeEditor(props) {
         document.querySelector('section').style.width = '99%'
     },[])
     useEffect(() =>{
-        let node = findNode(tree,fileId);
+        let node = tree === undefined ?undefined : findNode(tree,fileId);
         if(node === undefined){
             setReadOnly(true);
             setValue('oops, it looks like you have not load file correctly');
