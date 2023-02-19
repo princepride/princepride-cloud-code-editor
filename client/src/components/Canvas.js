@@ -20,65 +20,66 @@ const initialSetting = {
 } 
 function Canvas() {
   const {id: projectId} = useParams();
-  const [fileId, setFileId] = useState("0");
+  const [fileId, setFileId] = useState("5");
   const [tree, setTree] = useState(initialTree);
   const [setting, setSetting] = useState(initialSetting);
   const [socket, setSocket] = useState();
 
-  useEffect(() => {
-    const s = io("http://"+config.url+":3001")
-    setSocket(s)
-    return () => {
-        s.disconnect()
-    }
-}, [])
+//  useEffect(() => {
+//    const s = io("http://"+config.url+":3001")
+//    setSocket(s)
+//    return () => {
+//        s.disconnect()
+//    }
+//}, [])
 
-useEffect(() => {
-    console.log(socket)
-    if (socket == null || tree == null) return
+//useEffect(() => {
+//    console.log(socket)
+//    if (socket == null || tree == null) return
     
-    socket.once("load-project", project => {
-        setTree(project)
-    })
-    socket.emit('get-project', projectId)
-},[socket, tree, projectId])
+//    socket.once("load-project", project => {
+//        setTree(project)
+//    })
+//    socket.emit('get-project', projectId)
+//},[socket, tree, projectId])
 
-  useEffect(() =>{
-    let element1 = document.querySelector('.file-explorer-tree');
-    let element2 = document.querySelector('body');
-    element1.style.color=setting.color;
-    element1.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
-    element2.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
-  },[setting])
+//  useEffect(() => {
+//    if (socket == null || tree == null) return
 
-  useEffect(() => {
-    if (socket == null || tree == null) return
+//    const interval = setInterval(() => {
+//      socket.emit("save-project", tree)
+//    }, SAVE_INTERVAL_MS)
 
-    const interval = setInterval(() => {
-      socket.emit("save-project", tree)
-    }, SAVE_INTERVAL_MS)
+//    return () => {
+//      clearInterval(interval)
+//    }
+//  }, [socket, tree])
 
-    return () => {
-      clearInterval(interval)
-    }
-  }, [socket, tree])
+//  useEffect(() => {
+//    if (socket == null || tree == null) return
+//    const handler = (action, id, newItem) => {
+//        // rename(id, newname), delete(id, ""), 
+//        // edit code(id, newCodes), addItem((folder, file), newname),
+//        // upload new project(id, newProject)
+//    }
+//}, [socket, tree])
 
-  useEffect(() => {
-    if (socket == null || tree == null) return
-    const handler = (action, id, newItem) => {
-        // rename(id, newname), delete(id, ""), 
-        // edit code(id, newCodes), addItem((folder, file), newname),
-        // upload new project(id, newProject)
-    }
-}, [socket, tree])
+//useEffect(() => {
+//    if (socket == null || tree == null) return
+//    const handler = (delta, oldDelta, source) => {
+//        if (source !== 'user') return
+//        socket.emit("send-changes",delta)
+//    }
+//}, [socket, tree])
 
-useEffect(() => {
-    if (socket == null || tree == null) return
-    const handler = (delta, oldDelta, source) => {
-        if (source !== 'user') return
-        socket.emit("send-changes",delta)
-    }
-}, [socket, tree])
+
+useEffect(() =>{
+  let element1 = document.querySelector('.file-explorer-tree');
+  let element2 = document.querySelector('body');
+  element1.style.color=setting.color;
+  element1.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
+  element2.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
+},[setting])
 
   return (
     <div>

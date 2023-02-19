@@ -6,6 +6,7 @@ import styles from './CodeEditor.module.css';
 function CodeEditor(props) {
     const {fileId, tree, setTree, setting, setSetting} = props;
     const [value, setValue] = useState();
+    const [readOnly, setReadOnly] = useState(false);
     //const [language, setLanguage] = useState('javascript');
     const [editor,setEditor] = useState(null);
 
@@ -14,10 +15,19 @@ function CodeEditor(props) {
     },[])
     useEffect(() =>{
         let node = findNode(tree,fileId);
-        setValue(node.context);
-        let filename = node.module;
-        let fileSuffix = filename.split('.').pop();
-        setSetting({...setting,language : languageSuffix[fileSuffix] || 'markdown'})
+        if(node === undefined){
+            setReadOnly(true);
+            setValue('oops, it looks like you have not load file correctly');
+            setSetting({...setting,language : 'markdown'});
+        }
+        else{
+            setReadOnly(false);
+            setValue(node.context);
+            let filename = node.module;
+            let fileSuffix = filename.split('.').pop();
+            setSetting({...setting,language : languageSuffix[fileSuffix] || 'markdown'})
+        }
+        
     }, [fileId])
 
     const findNode = (root, targetId) => {
@@ -63,6 +73,7 @@ function CodeEditor(props) {
                 options={{
                 selectOnLineNumbers: true,
                 fontSize: setting.fontSize[0],
+                readOnly:readOnly,
             }}/>
             {/*</ReactResizeDetector>*/}
         </div>

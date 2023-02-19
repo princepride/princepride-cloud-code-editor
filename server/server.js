@@ -30,8 +30,8 @@ io.on("connection", socket => {
     socket.join(projectId)
     socket.emit("load-project", project.data)
 
-    socket.on("send-changes", (action, id, newItem) => {
-      socket.broadcast.to(projectId).emit("receive-changes", action, id, newItem)
+    socket.on("send-changes", (tree) => {
+      socket.broadcast.to(projectId).emit("receive-changes", tree)
     })
 
     socket.on("save-project", async data => {
@@ -47,3 +47,7 @@ async function findOrCreateProject(id) {
   if (project) return project
   return await Project.create({ _id: id, data: defaultValue })
 }
+
+//socket.on("send-changes", (action, id, newItem) => {
+//  socket.broadcast.to(projectId).emit("receive-changes", action, id, newItem)
+//})
