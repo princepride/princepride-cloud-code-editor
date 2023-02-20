@@ -22,7 +22,7 @@ function Canvas() {
   const [fileId, setFileId] = useState("5");
   //const [tree, setTree] = useState(initialTree);
   const [setting, setSetting] = useState(initialSetting);
-  
+  const [showComponent, setShowComponent] = useState(false);
   const {id: projectId} = useParams();
   const [socket, setSocket] = useState();
   const [tree, setTree] = useState();
@@ -36,11 +36,19 @@ function Canvas() {
 }, [])
 
 useEffect(() => {
-  console.log(socket)
+  const timer = setTimeout(() => {
+    setShowComponent(true);
+  }, 1000);
+  return () => clearTimeout(timer);
+}, []);
+
+useEffect(() => {
+  //console.log(socket)
   if (socket == null) return
   
   socket.once("load-project", project => {
       setTree(project)
+      //console.log(tree)
   })
   socket.emit('get-project', projectId)
 },[socket, tree, projectId])
@@ -76,10 +84,10 @@ useEffect(() => {
 }, [socket, tree])
 
 useEffect(() =>{
-  let element1 = document.querySelector('.file-explorer-tree');
+  //let element1 = document.querySelector('.file-explorer-tree');
   let element2 = document.querySelector('body');
-  element1.style.color=setting.color;
-  element1.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
+  //element1.style.color=setting.color;
+  //element1.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
   element2.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
 },[setting])
 
@@ -92,7 +100,7 @@ useEffect(() =>{
         defaultSize={"15%"}
         style={{"width":"100vw"}}
       >
-        <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree} setting={setting}/>
+        {showComponent && <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree} setting={setting} socket={socket}/>}
         <CodeEditor fileId={fileId} tree={tree} setTree={setTree} setSetting={setSetting} setting={setting}/>
       </SplitPane>
       <OffCanvas setSetting={setSetting} setting={setting}/>

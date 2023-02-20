@@ -54,6 +54,13 @@ class FileExplorer extends Component {
     collapsed: false // start with unmodified tree
   };
 
+  //componentDidMount() {
+  //  this.props.socket.once("load-project", project => {
+  //    this.props.setTree(project)
+  //    //console.log(tree)
+  //  })
+  //}
+
   renderNode = (node) => {
     const renderFileFolderToolbar = (isFolder, caption) => (
       <Toolbar style={{color: this.props.setting.theme === 'vs-dark'?"#d8e0f0":"#404040"}}>
@@ -206,10 +213,10 @@ class FileExplorer extends Component {
 
   render() {
     const { collapsed } = this.state;
-
+    console.log(this.props.tree);
     return (
       <div>
-        <div className="file-explorer-tree">
+        <div className="file-explorer-tree" style={{color:this.props.setting.color, backgroundColor:this.props.setting.theme==='vs-dark'?'#1a202c':'#ffffff'}}>
           <div style={{display:"flex",justifyContent:"space-evenly"}}>
             <button id="importButton" 
             style={{borderRadius:'8px',
