@@ -12,6 +12,7 @@ import { useParams } from 'react-router-dom';
 import config from '../config.json';
 
 const SAVE_INTERVAL_MS = 2000
+const FILE_EXPLORER_TIMEOUT = 1000
 const initialSetting = {
   color: '#ff0000',
   theme: "vs-dark",
@@ -38,7 +39,7 @@ function Canvas() {
 useEffect(() => {
   const timer = setTimeout(() => {
     setShowComponent(true);
-  }, 1000);
+  }, FILE_EXPLORER_TIMEOUT);
   return () => clearTimeout(timer);
 }, []);
 
