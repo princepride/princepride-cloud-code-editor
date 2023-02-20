@@ -20,8 +20,24 @@ export const themeColors = [
       color: '#1E4DB7',
     },
     {
-      name: 'red',
       color: '#ff0000',
+      name: 'red',
+    },
+    {
+      color: '#00ff00',
+      name: 'green',
+    },
+    {
+      color: '#ffff00',
+      name: 'yellow',
+    },
+    {
+      color: '#ff00ff',
+      name: 'pink',
+    },
+    {
+      color: '#606060',
+      name: 'silver',
     },
   ];
 

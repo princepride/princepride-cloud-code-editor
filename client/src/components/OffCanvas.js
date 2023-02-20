@@ -81,7 +81,7 @@ function OffCanvas(props) {
             </div>
           <div style={{marginBottom:'10vh'}}>
             <p style={{fontSize:'1.8vw', color:setting.theme==='vs-dark'?'white':'black'}}>Theme Colors</p>
-            <div style={{display:'flex', gap:'12px', justifyContent: 'center'}}>
+            <div style={{display:'flex', gap:'12px', justifyContent: 'center', flexWrap: 'wrap'}}>
             {themeColors.map((item, index) => (
               <Tooltip key={index} title={item.name}>
                 <div key={item.name}>
