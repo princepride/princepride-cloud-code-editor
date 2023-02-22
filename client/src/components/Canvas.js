@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback, useRef } from 'react';
 import CodeEditor from './CodeEditor';
 import FileExplorer from './FileExplorer';
 import initialTree from "../data/tree";
@@ -12,7 +12,7 @@ import { useParams } from 'react-router-dom';
 import config from '../config.json';
 
 const SAVE_INTERVAL_MS = 2000
-const FILE_EXPLORER_TIMEOUT = 1000
+//const FILE_EXPLORER_TIMEOUT = 1000
 const initialSetting = {
   color: '#ff0000',
   theme: "vs-dark",
@@ -20,10 +20,11 @@ const initialSetting = {
   language: "javascript"
 } 
 function Canvas() {
+  const wrapper = useRef(null);
   const [fileId, setFileId] = useState("5");
   //const [tree, setTree] = useState(initialTree);
   const [setting, setSetting] = useState(initialSetting);
-  const [showComponent, setShowComponent] = useState(false);
+  //const [showComponent, setShowComponent] = useState(false);
   const {id: projectId} = useParams();
   const [socket, setSocket] = useState();
   const [tree, setTree] = useState();
@@ -36,12 +37,12 @@ function Canvas() {
     }
 }, [])
 
-useEffect(() => {
-  const timer = setTimeout(() => {
-    setShowComponent(true);
-  }, FILE_EXPLORER_TIMEOUT);
-  return () => clearTimeout(timer);
-}, []);
+//useEffect(() => {
+//  const timer = setTimeout(() => {
+//    setShowComponent(true);
+//  }, FILE_EXPLORER_TIMEOUT);
+//  return () => clearTimeout(timer);
+//}, []);
 
 useEffect(() => {
   //console.log(socket)
@@ -101,8 +102,10 @@ useEffect(() =>{
         defaultSize={"15%"}
         style={{"width":"100vw"}}
       >
-        {showComponent && <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree} setting={setting} socket={socket}/>}
+      {tree && <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree} setting={setting} socket={socket}/>}
+        {/*{showComponent && <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree} setting={setting} socket={socket}/>}*/}
         <CodeEditor fileId={fileId} tree={tree} setTree={setTree} setSetting={setSetting} setting={setting}/>
+      
       </SplitPane>
       <OffCanvas setSetting={setSetting} setting={setting}/>
       <RunButton setting={setting}/>
