@@ -213,7 +213,6 @@ class FileExplorer extends Component {
 
   render() {
     const { collapsed } = this.state;
-    console.log(this.props.tree);
     return (
       <div>
         <div className="file-explorer-tree" style={{color:this.props.setting.color, backgroundColor:this.props.setting.theme==='vs-dark'?'#1a202c':'#ffffff'}}>

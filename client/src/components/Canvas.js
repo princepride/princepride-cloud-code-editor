@@ -50,7 +50,7 @@ useEffect(() => {
   
   socket.once("load-project", project => {
       setTree(project)
-      //console.log(tree)
+      console.log(tree)
   })
   socket.emit('get-project', projectId)
 },[socket, tree, projectId])
