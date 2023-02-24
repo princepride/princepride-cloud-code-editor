@@ -44,6 +44,47 @@ function Canvas() {
 //  return () => clearTimeout(timer);
 //}, []);
 
+useEffect(() => {
+  //console.log(socket)
+  if (socket == null) return
+  
+  socket.once("load-project", project => {
+      setTree(project)
+      console.log(tree)
+  })
+  socket.emit('get-project', projectId)
+},[socket, tree, projectId])
+
+useEffect(() => {
+  if (socket == null) return
+
+  const interval = setInterval(() => {
+    socket.emit("save-project", tree)
+  }, SAVE_INTERVAL_MS)
+
+  return () => {
+    clearInterval(interval)
+  }
+}, [socket, tree])
+
+useEffect(() => {
+  if (socket == null ) return
+  const handler = (project) => {
+      setTree(project)
+  }
+  socket.on("receive-changes", handler)
+
+  return () => {
+    socket.off('receive-changes',handler)
+  }
+}, [socket, tree])
+
+useEffect(() => {
+  if (socket == null) return
+  socket.emit("send-changes",tree)
+
+}, [socket, tree])
+
 useEffect(() =>{
   //let element1 = document.querySelector('.file-explorer-tree');
   let element2 = document.querySelector('body');
@@ -74,3 +115,51 @@ useEffect(() =>{
 }
 
 export default Canvas;
+
+
+//  useEffect(() => {
+//    const s = io("http://"+config.url+":3001")
+//    setSocket(s)
+//    return () => {
+//        s.disconnect()
+//    }
+//}, [])
+
+//useEffect(() => {
+//    console.log(socket)
+//    if (socket == null || tree == null) return
+    
+//    socket.once("load-project", project => {
+//        setTree(project)
+//    })
+//    socket.emit('get-project', projectId)
+//},[socket, tree, projectId])
+
+//  useEffect(() => {
+//    if (socket == null || tree == null) return
+
+//    const interval = setInterval(() => {
+//      socket.emit("save-project", tree)
+//    }, SAVE_INTERVAL_MS)
+
+//    return () => {
+//      clearInterval(interval)
+//    }
+//  }, [socket, tree])
+
+//  useEffect(() => {
+//    if (socket == null || tree == null) return
+//    const handler = (action, id, newItem) => {
+//        // rename(id, newname), delete(id, ""), 
+//        // edit code(id, newCodes), addItem((folder, file), newname),
+//        // upload new project(id, newProject)
+//    }
+//}, [socket, tree])
+
+//useEffect(() => {
+//    if (socket == null || tree == null) return
+//    const handler = (delta, oldDelta, source) => {
+//        if (source !== 'user') return
+//        socket.emit("send-changes",delta)
+//    }
+//}, [socket, tree])
