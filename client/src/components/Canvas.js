@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import CodeEditor from './CodeEditor';
 import FileExplorer from './FileExplorer';
 import initialTree from "../data/tree";
@@ -22,9 +22,7 @@ const initialSetting = {
 function Canvas() {
   const wrapper = useRef(null);
   const [fileId, setFileId] = useState("5");
-  //const [tree, setTree] = useState(initialTree);
   const [setting, setSetting] = useState(initialSetting);
-  //const [showComponent, setShowComponent] = useState(false);
   const {id: projectId} = useParams();
   const [socket, setSocket] = useState();
   const [tree, setTree] = useState();
@@ -37,18 +35,34 @@ function Canvas() {
     }
 }, [])
 
-//useEffect(() => {
-//  const timer = setTimeout(() => {
-//    setShowComponent(true);
-//  }, FILE_EXPLORER_TIMEOUT);
-//  return () => clearTimeout(timer);
-//}, []);
+if(socket != null) {
+  socket.once("load-project", project => {
+    setTree(project)
+  })
+  
+  socket.on("receive-changes", tree => {
+    setTree(tree)
+  })
+}
+
+useEffect(() => {
+  //console.log(socket)
+  if (socket == null) return
+  else {
+    socket.emit('get-project', projectId)
+  }
+  
+},[socket, tree, projectId])
+
+useEffect(() => {
+  if (socket == null) return
+  console.log(tree)
+  socket.emit("send-changes",tree)
+
+}, [socket, tree])
 
 useEffect(() =>{
-  //let element1 = document.querySelector('.file-explorer-tree');
   let element2 = document.querySelector('body');
-  //element1.style.color=setting.color;
-  //element1.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
   element2.style.backgroundColor = setting.theme==='vs-dark'?'#1a202c':'#ffffff';
 },[setting])
 
@@ -62,7 +76,6 @@ useEffect(() =>{
         style={{"width":"100vw"}}
       >
       {tree && <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree} setting={setting} socket={socket}/>}
-        {/*{showComponent && <FileExplorer setFileId={setFileId} tree={tree} setTree={setTree} setting={setting} socket={socket}/>}*/}
         <CodeEditor fileId={fileId} tree={tree} setTree={setTree} setSetting={setSetting} setting={setting}/>
       
       </SplitPane>

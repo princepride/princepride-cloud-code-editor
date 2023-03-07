@@ -35,6 +35,7 @@ function CodeEditor(props) {
             return root;
         } else if (root.children !== undefined) {
             for (const child of root.children) {
+                console.log(child);
                 let res = findNode(child, targetId);
                 if (res !== undefined) {
                     return res;
