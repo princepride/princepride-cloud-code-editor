@@ -1,16 +1,16 @@
 const mongoose = require('mongoose')
-const Project = require('./Project')
+const Tree = require('./Tree')
 const config = require('./config.json')
 
 const defaultValue = {
-    module: "project",
+    module: "tree",
     id: "root-0",
     children: [],
     "collapsed": false,
 }
 
 mongoose.set("strictQuery", false);
-mongoose.connect("mongodb://localhost/princepride-project-clone")
+mongoose.connect("mongodb://localhost/princepride-tree-clone")
 
 const io = require("socket.io")(3001, {
     cors: {
@@ -35,12 +35,12 @@ async function findOrCreateProject(id) {
         return ;
     }
     else {
-        const project = await Project.findById(id);
+        const tree = await Tree.findById(id);
         if (project) {
             return project;
         }
         else {
-            return await Project.create({ _id: id, data: defaultValue })
+            return await Tree.create({ _id: id, data: defaultValue })
         }
     }
 }

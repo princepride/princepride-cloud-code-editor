@@ -25,7 +25,7 @@ function Canvas() {
   const [setting, setSetting] = useState(initialSetting);
   const {id: projectId} = useParams();
   const [socket, setSocket] = useState();
-  const [tree, setTree] = useState();
+  const [tree, setTree] = useState(initialTree);
 
   useEffect(() => {
     const s = io("http://"+config.url+":3001")
@@ -36,8 +36,8 @@ function Canvas() {
 }, [])
 
 if(socket != null) {
-  socket.once("load-project", project => {
-    setTree(project)
+  socket.once("load-project", tree => {
+    setTree(tree)
   })
   
   socket.on("receive-changes", tree => {
