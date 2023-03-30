@@ -1,46 +1,25 @@
 const mongoose = require('mongoose')
-const Tree = require('./Tree')
-const config = require('./config.json')
+const express = require('express');
 
-const defaultValue = {
-    module: "tree",
-    id: "root-0",
-    children: [],
-    "collapsed": false,
-}
-
-mongoose.set("strictQuery", false);
 mongoose.connect("mongodb://localhost/princepride-tree-clone")
+const app = express();
+app.use(express.json());
 
-const io = require("socket.io")(3001, {
-    cors: {
-        origin: "http://" + config.url + ":3000",
-        methods: ["GET", "POST"],
-    },
-})
+const treeSchema = new mongoose.Schema({
+    _id: { type: String, required: true },
+    tree: { type: Object, required: true },
+  });
+  
+const TreeModel = mongoose.model('TreeModel', treeSchema);
 
-io.on("connection", socket => {
-    socket.on("get-project", async projectId => {
-        const project = await findOrCreateProject(projectId);
-        socket.join(projectId);
-        socket.emit("load-project", project.data);
-        socket.on("send-changes", (tree) => {
-            socket.broadcast.to(projectId).emit("receive-changes", tree)
-        })
-    })
-});
-
-async function findOrCreateProject(id) {
-    if(id == null) {
-        return ;
+app.post('/update', async (req, res) => {
+    try {
+      const { _id, tree } = req.body;
+      const myData = new MyModel({ _id, tree });
+      await myData.save();
+      res.status(200).send('Data saved successfully');
+    } catch (error) {
+      res.status(400).send(error.message);
     }
-    else {
-        const tree = await Tree.findById(id);
-        if (project) {
-            return project;
-        }
-        else {
-            return await Tree.create({ _id: id, data: defaultValue })
-        }
-    }
-}
+  });
+
